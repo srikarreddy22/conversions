@@ -4,29 +4,21 @@
 
 void strrev (char *);
 
-// Function to convert decimal to binary and return as a 
-// string 
 char *
 decimalToBinary (int decimal)
 {
-  // Allocate space for a 32-bit binary string + '\0' 
   char *binary = (char *) malloc (33);
-
   int i = 0;
-  // converting to binary 
   while (decimal)
     {
       binary[i++] = '0'+ (decimal & 1);
       decimal >>= 1;
-    //decimal=decimal>>1;  
     }
   binary[i] = '\0';
   strrev (binary);
   return binary;
 }
 
-// Function to convert binary to decimal and return as an 
-// integer 
 int
 binaryToDecimal (char binary[])
 {
@@ -39,25 +31,19 @@ binaryToDecimal (char binary[])
   return decimal;
 }
 
-// Function to convert decimal to octal and return as a 
-// string 
 char *
 decimalToOctal (int decimal)
 {
-  // Allocate space for an octal string 
   char *octal = (char *) malloc (12);
   if (octal == NULL)
     {
       printf ("Memory allocation failed.\n");
       exit (1);
     }
-  // Convert decimal to octal 
   sprintf (octal, "%o", decimal);
   return octal;
 }
 
-// Function to convert octal to decimal and return as an 
-// integer 
 int
 octalToDecimal (char octal[])
 {
@@ -70,17 +56,12 @@ octalToDecimal (char octal[])
   return decimal;
 }
 
-// Function to convert hexadecimal to binary and return as a 
-// string 
 char *
 hexadecimalToBinary (char hex[])
 {
-  // converting hexadecimal string to integer 
   unsigned int hexNum;
   sscanf (hex, "%x", &hexNum);
-  // string to store binary number 
   char binary[33] = "";
-  // converting to hexadecimal 
   int i = 0;
   while (hexNum)
     {
@@ -89,44 +70,31 @@ hexadecimalToBinary (char hex[])
     }
   binary[i] = '\0';
   strrev (binary);
-
   return strdup (binary);
 }
 
-// Function to convert binary to hexadecimal and return as a 
-// string 
 char *
 binaryToHexadecimal (char binary[])
 {
-  // Pad the binary string with leading zeros to ensure 
-  // it's a multiple of 4 
   int length = strlen (binary);
   int padding = (4 - (length % 4)) % 4;
   char paddedBinary[129];
   memset (paddedBinary, '0', padding);
   strcpy (paddedBinary + padding, binary);
-  // Define a mapping of binary strings to their 
-  // hexadecimal representations 
   char *binaryHexDigits[] = { "0000", "0001", "0010", "0011", "0100", "0101",
     "0110", "0111", "1000", "1001", "1010", "1011",
     "1100", "1101", "1110", "1111"
   };
-  char hexadecimal[33] = "";	// Allocate space for an 
-  // 8-digit hexadecimal string 
-  // Iterate through groups of 4 binary digits and convert 
-  // to hexadecimal 
+  char hexadecimal[33] = "";
   for (int i = 0; i < length + padding; i += 4)
     {
       char group[5];
       strncpy (group, paddedBinary + i, 4);
       group[4] = '\0';
-      // Find the corresponding hexadecimal digit 
       for (int j = 0; j < 16; j++)
 	{
 	  if (strcmp (group, binaryHexDigits[j]) == 0)
 	    {
-	      // Append the corresponding hexadecimal 
-	      // digit 
 	      char hexDigit[2];
 	      sprintf (hexDigit, "%X", j);
 	      strcat (hexadecimal, hexDigit);
@@ -137,7 +105,6 @@ binaryToHexadecimal (char binary[])
   return strdup (hexadecimal);
 }
 
-// driver code 
 int main ()
 {
   int choice;
@@ -160,7 +127,7 @@ int main ()
 	  break;
 	}
 
-      char input[100];		// Buffer for user input 
+      char input[100];
       switch (choice)
 	{
 	case 1:
@@ -211,7 +178,6 @@ int main ()
   return 0;
 }
 
-// reversing string 
 void
 strrev (char *str)
 {
